@@ -6,14 +6,18 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://geo-like.github.io">
-  <title>Archives: 2017 | Hexo</title>
+  <title>Test My Site | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="Hexo">
-<meta property="og:url" content="http://geo-like.github.io/archives/2017/index.html">
+  <meta name="description" content="openCV中的查找表ref：http://blog.csdn.net/u010963435/article/details/78569714首次见识LUT是在openCV官方文档:How to scan images, lookup tables and time measurement with OpenCV文章中">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Test My Site">
+<meta property="og:url" content="http://geo-like.github.io/2017/11/24/Test-My-Site/index.html">
 <meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="openCV中的查找表ref：http://blog.csdn.net/u010963435/article/details/78569714首次见识LUT是在openCV官方文档:How to scan images, lookup tables and time measurement with OpenCV文章中通过一个图像色彩压缩的例子，对比LUT与其他三种图像遍历方法的时间耗费，表明LU">
+<meta property="og:updated_time" content="2017-11-24T14:35:09.596Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Hexo">
+<meta name="twitter:title" content="Test My Site">
+<meta name="twitter:description" content="openCV中的查找表ref：http://blog.csdn.net/u010963435/article/details/78569714首次见识LUT是在openCV官方文档:How to scan images, lookup tables and time measurement with OpenCV文章中通过一个图像色彩压缩的例子，对比LUT与其他三种图像遍历方法的时间耗费，表明LU">
   
     <link rel="alternative" href="/atom.xml" title="Hexo" type="application/atom+xml">
   
@@ -149,130 +153,170 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-Test-My-Site" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2017" class="archive-year">2017</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/11/24/Welcome-To-My-Blog/" class="archive-article-date">
-  	<time datetime="2017-11-24T14:50:58.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-11-24</time>
-</a>
-        </div>
-    	 
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/11/24/Welcome-To-My-Blog/">Welcome To My Blog</a>
+    <h1 class="article-title" itemprop="name">
+      Test My Site
     </h1>
   
 
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/11/24/Test-My-Site/" class="archive-article-date">
+        
+        <a href="/2017/11/24/Test-My-Site/" class="archive-article-date">
   	<time datetime="2017-11-24T14:30:14.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-11-24</time>
 </a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/11/24/Test-My-Site/">Test My Site</a>
-    </h1>
-  
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="openCV中的查找表"><a href="#openCV中的查找表" class="headerlink" title="openCV中的查找表"></a>openCV中的查找表</h1><p>ref：<a href="http://blog.csdn.net/u010963435/article/details/78569714" target="_blank" rel="noopener">http://blog.csdn.net/u010963435/article/details/78569714</a><br>首次见识LUT是在openCV官方文档:<a href="https://docs.opencv.org/master/db/da5/tutorial_how_to_scan_images.html" target="_blank" rel="noopener">How to scan images, lookup tables and time measurement with OpenCV</a>文章中通过一个<strong>图像色彩压缩</strong>的例子，对比LUT与其他三种图像遍历方法的时间耗费，表明LUT具有快速遍历图像的能力。</p>
+<p>从数学上来看查找表是一个简单的<strong>一对一或多对一的函数</strong>，定义了如何将像素转换为新的值。从数据的组织关系上来看，查找表是一维或多维的数组，存储了不同输入值所对应的输出值。查找表在图像处理中主要用于像素的点运算，尤其是像素之间无位置相关性的操作中，如：<strong>图像色彩空间压缩</strong>、<strong>图像取反</strong>、<strong>图像分割</strong>，<strong>直方图均衡化</strong>等仅需要考虑像素值的应用。当需要对图像应用<strong>窗口运算</strong>等与像素位置相关的操作时，就不能使用查找表。(修改自<a href="http://www.voidcn.com/article/p-dypyzpta-bgz.html" target="_blank" rel="noopener">http://www.voidcn.com/article/p-dypyzpta-bgz.html</a>)</p>
+<p>查找表使用<strong>赋值</strong>操作取代<strong>计算</strong>操作来节省时间耗费，仅需一次遍历就能完成操作任务。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">   uchar table[256];</span><br><span class="line">   for (int i = 0; i &lt; 256; ++i)</span><br><span class="line">      table[i] = (uchar)(divideWith * (i/divideWith));</span><br><span class="line">··· ···</span><br><span class="line">   for( i = 0; i &lt; nRows; ++i)</span><br><span class="line">   &#123;</span><br><span class="line">       p = Img.ptr&lt;uchar&gt;(i);</span><br><span class="line">       for ( j = 0; j &lt; nCols; ++j)</span><br><span class="line">       &#123;</span><br><span class="line">           p[j] = table[p[j]]; //这也应该算是一种查找表[映射]</span><br><span class="line">       &#125;</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
+<p>在Matlab、Numpy中有一种使用logical/bool 类型的矩阵作为索引，进行批量操作矩阵元素的方法，也可以认为是一种查找表。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">%%@ matlab code</span><br><span class="line">a = magic(5);</span><br><span class="line">b = ones(5);</span><br><span class="line">a(a&gt;b) = 0; %将a&gt;b矩阵元素赋值为0</span><br></pre></td></tr></table></figure></p>
+<p>更多参考：<br><a href="http://blog.csdn.net/jameshater/article/details/50759650" target="_blank" rel="noopener">http://blog.csdn.net/jameshater/article/details/50759650</a></p>
 
-        <div class="article-info info-on-right">
-          
-          
+      
 
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
+        </div>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=http://geo-like.github.io/2017/11/24/Test-My-Site/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/11/24/My-New-Post/" class="archive-article-date">
-  	<time datetime="2017-11-24T12:27:29.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-11-24</time>
-</a>
+<nav id="article-nav">
+  
+    <a href="/2017/11/24/Welcome-To-My-Blog/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          Welcome To My Blog
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2017/11/24/My-New-Post/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">My New Post</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
         </div>
-    	 
+        
+        
+    </div>
+</aside>
+
+
+
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/11/24/My-New-Post/">My New Post</a>
-    </h1>
+  
   
 
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/11/24/hello-world/" class="archive-article-date">
-  	<time datetime="2017-11-24T12:13:33.027Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-11-24</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/11/24/hello-world/">Hello World</a>
-    </h1>
   
 
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
   
 
-    
+  
 
 
           </div>
@@ -295,8 +339,8 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,
