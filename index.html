@@ -151,6 +151,74 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-Test-My-Site" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/11/24/Test-My-Site/">Test My Site</a>
+    </h1>
+  
+
+        
+        <a href="/2017/11/24/Test-My-Site/" class="archive-article-date">
+  	<time datetime="2017-11-24T14:30:14.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-11-24</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="openCV中的查找表"><a href="#openCV中的查找表" class="headerlink" title="openCV中的查找表"></a>openCV中的查找表</h1><p>ref：<a href="http://blog.csdn.net/u010963435/article/details/78569714" target="_blank" rel="noopener">http://blog.csdn.net/u010963435/article/details/78569714</a><br>首次见识LUT是在openCV官方文档:<a href="https://docs.opencv.org/master/db/da5/tutorial_how_to_scan_images.html" target="_blank" rel="noopener">How to scan images, lookup tables and time measurement with OpenCV</a>文章中通过一个<strong>图像色彩压缩</strong>的例子，对比LUT与其他三种图像遍历方法的时间耗费，表明LUT具有快速遍历图像的能力。</p>
+<p>从数学上来看查找表是一个简单的<strong>一对一或多对一的函数</strong>，定义了如何将像素转换为新的值。从数据的组织关系上来看，查找表是一维或多维的数组，存储了不同输入值所对应的输出值。查找表在图像处理中主要用于像素的点运算，尤其是像素之间无位置相关性的操作中，如：<strong>图像色彩空间压缩</strong>、<strong>图像取反</strong>、<strong>图像分割</strong>，<strong>直方图均衡化</strong>等仅需要考虑像素值的应用。当需要对图像应用<strong>窗口运算</strong>等与像素位置相关的操作时，就不能使用查找表。(修改自<a href="http://www.voidcn.com/article/p-dypyzpta-bgz.html" target="_blank" rel="noopener">http://www.voidcn.com/article/p-dypyzpta-bgz.html</a>)</p>
+<p>查找表使用<strong>赋值</strong>操作取代<strong>计算</strong>操作来节省时间耗费，仅需一次遍历就能完成操作任务。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">   uchar table[256];</span><br><span class="line">   for (int i = 0; i &lt; 256; ++i)</span><br><span class="line">      table[i] = (uchar)(divideWith * (i/divideWith));</span><br><span class="line">··· ···</span><br><span class="line">   for( i = 0; i &lt; nRows; ++i)</span><br><span class="line">   &#123;</span><br><span class="line">       p = Img.ptr&lt;uchar&gt;(i);</span><br><span class="line">       for ( j = 0; j &lt; nCols; ++j)</span><br><span class="line">       &#123;</span><br><span class="line">           p[j] = table[p[j]]; //这也应该算是一种查找表[映射]</span><br><span class="line">       &#125;</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
+<p>在Matlab、Numpy中有一种使用logical/bool 类型的矩阵作为索引，进行批量操作矩阵元素的方法，也可以认为是一种查找表。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">%%@ matlab code</span><br><span class="line">a = magic(5);</span><br><span class="line">b = ones(5);</span><br><span class="line">a(a&gt;b) = 0; %将a&gt;b矩阵元素赋值为0</span><br></pre></td></tr></table></figure></p>
+<p>更多参考：<br><a href="http://blog.csdn.net/jameshater/article/details/50759650" target="_blank" rel="noopener">http://blog.csdn.net/jameshater/article/details/50759650</a></p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2017/11/24/Test-My-Site/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-My-New-Post" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
