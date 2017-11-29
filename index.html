@@ -252,6 +252,182 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://geo-like.github.io/blog/2017/11/29/ArcMap欧氏距离工具提取图像骨架线/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="GEO-LIKE">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="不为不知难已">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/blog/2017/11/29/ArcMap欧氏距离工具提取图像骨架线/" itemprop="url">ArcMap欧氏距离工具提取图像骨架线</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-11-29T08:42:07+08:00">
+                2017-11-29
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于&#58;</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2017-11-29T08:46:53+08:00">
+                2017-11-29
+              </time>
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-comment-o"></i>
+              </span>
+              
+                <a href="/blog/2017/11/29/ArcMap欧氏距离工具提取图像骨架线/#SOHUCS" itemprop="discussionUrl">
+                  <span id="url::http://geo-like.github.io/blog/2017/11/29/ArcMap欧氏距离工具提取图像骨架线/" class="cy_cmt_count" data-xid="blog/2017/11/29/ArcMap欧氏距离工具提取图像骨架线/" itemprop="commentsCount" ></span>
+                </a>
+              
+            
+          
+
+          
+          
+             <span id="/blog/2017/11/29/ArcMap欧氏距离工具提取图像骨架线/" class="leancloud_visitors" data-flag-title="ArcMap欧氏距离工具提取图像骨架线">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="图像骨架线-Morphological-skeleton"><a href="#图像骨架线-Morphological-skeleton" class="headerlink" title="图像骨架线(Morphological skeleton)"></a>图像骨架线(Morphological skeleton)</h1><p>图像骨架线在wiki中有两个术语，分别是<a href="https://en.wikipedia.org/wiki/Morphological_skeleton" target="_blank" rel="noopener">Morphological skeleton</a>和<a href="https://en.wikipedia.org/wiki/Topological_skeleton" target="_blank" rel="noopener">Topological skeleton</a>。</p>
+<ol>
+<li>形态骨架线（<a href="https://en.wikipedia.org/wiki/Morphological_skeleton" target="_blank" rel="noopener">Morphological skeleton</a>）在数字图像处理中，形态骨架是通过形态学算子计算的形状或二值图像的骨架（或中轴）表示。形态骨架有两种：那些通过形态开口定义的，可以重建原始形状的开口， 那些通过hit-or-miss变换来计算的，它保留了形状的拓扑结构。（谷歌翻译）</li>
+<li>拓扑骨架线（<a href="https://en.wikipedia.org/wiki/Topological_skeleton" target="_blank" rel="noopener">Topological skeleton</a>）在形状分析中，形状的骨架（或拓扑骨架）是与其边界等距的形状的薄形。骨架通常强调形状的几何和拓扑性质，如连通性，拓扑结构，长度，方向和宽度。连同它的点到形状边界的距离，骨架还可以作为形状的表示（它们包含重建形状所需的所有信息）。（谷歌翻译）</li>
+</ol>
+<h1 id="骨架线提取方法"><a href="#骨架线提取方法" class="headerlink" title="骨架线提取方法"></a>骨架线提取方法</h1><p>根据上面图像骨架线的定义，即骨架线到边界等距，可知骨架线是与边界距离相等的点的集合。作为专业的GIS人员，很容易就想到了由边界向内部做缓冲区，就可以求出中心线，也可以提出骨架线。这里生成的缓冲区必须是连续的缓冲区，所以不能使用矢量缓冲区的<strong>Buffer</strong>，而应该使用<strong>欧氏距离</strong>向图形内部做缓冲区，原理和openCV中的<a href="https://en.wikipedia.org/wiki/Distance_transform" target="_blank" rel="noopener"><strong>距离变换</strong></a>一致。</p>
+<h2 id="欧式距离"><a href="#欧式距离" class="headerlink" title="欧式距离"></a>欧式距离</h2><p>直角坐标系中两点间的直线距离：<br>$$ dist = \sqrt{(x_1-x_2)^2 + (y_1-y_2)^2}$$</p>
+<h2 id="ArcMap中的欧氏距离"><a href="#ArcMap中的欧氏距离" class="headerlink" title="ArcMap中的欧氏距离"></a>ArcMap中的欧氏距离</h2><blockquote>
+<p>Euclidean Distance gives the distance from each cell in the raster to the closest source. Example of usage: What is the distance to the closest town?<br><img src="http://img.blog.csdn.net/20171128230338728?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvdTAxMDk2MzQzNQ==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="欧式距离"></p>
+</blockquote>
+<h1 id="实验1"><a href="#实验1" class="headerlink" title="实验1"></a>实验1</h1><p>数据是随意生成的一个两个矩形<br><img src="http://img.blog.csdn.net/20171128230819353?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvdTAxMDk2MzQzNQ==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="实验1数据"></p>
+<h2 id="步骤"><a href="#步骤" class="headerlink" title="步骤"></a>步骤</h2><h3 id="1-图像取反"><a href="#1-图像取反" class="headerlink" title="1. 图像取反"></a>1. 图像取反</h3><p>画一个更大的矩形包裹住这两个小矩形，然后使用这两个小矩形在上面抠出两个洞。有很多方法可以抠这个洞，不献丑我就不写了，如下图：<br><img src="http://img.blog.csdn.net/20171128231310984?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvdTAxMDk2MzQzNQ==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="图像取反"></p>
+<h3 id="2-使用欧氏距离生成缓冲区-距离场"><a href="#2-使用欧氏距离生成缓冲区-距离场" class="headerlink" title="2. 使用欧氏距离生成缓冲区/距离场"></a>2. 使用欧氏距离生成缓冲区/距离场</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[Spatial Analysis]-&gt;[Distance]-&gt;[Euclidean Distance]</span><br></pre></td></tr></table></figure>
+<p><img src="http://img.blog.csdn.net/20171128232302515?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvdTAxMDk2MzQzNQ==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="欧式距离结果图"></p>
+<h3 id="3-提取骨架线"><a href="#3-提取骨架线" class="headerlink" title="3. 提取骨架线"></a>3. 提取骨架线</h3><p>这一步主要是提取距离场中的突变处，使用坡度或者曲率都可。下图因为宽度只有一两个像素而显示不出来，其实是连续的线。最后结果要重分类，将非骨架线区域转换成NoData。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[Spatial Analysis]-&gt;[Surface]-&gt;[Slope] or [Curvature]</span><br></pre></td></tr></table></figure></p>
+<p><img src="http://img.blog.csdn.net/20171128233014469?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvdTAxMDk2MzQzNQ==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="坡度"></p>
+<h3 id="4-转换成矢量线"><a href="#4-转换成矢量线" class="headerlink" title="4. 转换成矢量线"></a>4. 转换成矢量线</h3><p><img src="http://img.blog.csdn.net/20171128233537069?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvdTAxMDk2MzQzNQ==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="矢量骨架线"></p>
+<p><img src="http://img.blog.csdn.net/20171128233545649?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvdTAxMDk2MzQzNQ==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="叠加显示"></p>
+<h1 id="实验2"><a href="#实验2" class="headerlink" title="实验2"></a>实验2</h1><h2 id="数据"><a href="#数据" class="headerlink" title="数据"></a>数据</h2><p><img src="http://img.blog.csdn.net/20171128233929165?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvdTAxMDk2MzQzNQ==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="数据"></p>
+<h2 id="欧氏距离"><a href="#欧氏距离" class="headerlink" title="欧氏距离"></a>欧氏距离</h2><p><img src="http://img.blog.csdn.net/20171128234022935?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvdTAxMDk2MzQzNQ==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="欧氏距离图"></p>
+<h2 id="骨架线"><a href="#骨架线" class="headerlink" title="骨架线"></a>骨架线</h2><p>重分类的时候，因为阈值设置的不好，有断线，选取一个合适的阈值就可以处理断线了。<br><img src="http://img.blog.csdn.net/20171128234541920?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvdTAxMDk2MzQzNQ==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="矢量骨架线"></p>
+<h1 id="结果分析"><a href="#结果分析" class="headerlink" title="结果分析"></a>结果分析</h1><p>是不是很像山脊线？<br><img src="http://img.blog.csdn.net/20171128235230598?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvdTAxMDk2MzQzNQ==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="是不是很像山脊线"></p>
+<hr>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://geo-like.github.io/blog/2017/11/28/Cpp版openCV-waitKey-0-失效的解决办法-1/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1099,7 +1275,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-count">6</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -1121,7 +1297,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-count">7</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
