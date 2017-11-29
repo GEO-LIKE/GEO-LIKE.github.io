@@ -98,7 +98,7 @@
 <meta property="og:image" content="http://img.blog.csdn.net/20171128234022935?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvdTAxMDk2MzQzNQ==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
 <meta property="og:image" content="http://img.blog.csdn.net/20171128234541920?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvdTAxMDk2MzQzNQ==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
 <meta property="og:image" content="http://img.blog.csdn.net/20171128235230598?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvdTAxMDk2MzQzNQ==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
-<meta property="og:updated_time" content="2017-11-29T00:46:53.698Z">
+<meta property="og:updated_time" content="2017-11-29T00:50:23.530Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="ArcMap欧氏距离工具提取图像骨架线">
 <meta name="twitter:description" content="图像骨架线(Morphological skeleton)图像骨架线在wiki中有两个术语，分别是Morphological skeleton和Topological skeleton。  形态骨架线（Morphological skeleton）在数字图像处理中，形态骨架是通过形态学算子计算的形状或二值图像的骨架（或中轴）表示。形态骨架有两种：那些通过形态开口定义的，可以重建原始形状的开口， 那">
@@ -310,7 +310,7 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2017-11-29T08:46:53+08:00">
+              <time title="更新于" itemprop="dateModified" datetime="2017-11-29T08:50:23+08:00">
                 2017-11-29
               </time>
             
@@ -369,9 +369,9 @@
         <h1 id="图像骨架线-Morphological-skeleton"><a href="#图像骨架线-Morphological-skeleton" class="headerlink" title="图像骨架线(Morphological skeleton)"></a>图像骨架线(Morphological skeleton)</h1><p>图像骨架线在wiki中有两个术语，分别是<a href="https://en.wikipedia.org/wiki/Morphological_skeleton" target="_blank" rel="noopener">Morphological skeleton</a>和<a href="https://en.wikipedia.org/wiki/Topological_skeleton" target="_blank" rel="noopener">Topological skeleton</a>。</p>
 <ol>
 <li>形态骨架线（<a href="https://en.wikipedia.org/wiki/Morphological_skeleton" target="_blank" rel="noopener">Morphological skeleton</a>）在数字图像处理中，形态骨架是通过形态学算子计算的形状或二值图像的骨架（或中轴）表示。形态骨架有两种：那些通过形态开口定义的，可以重建原始形状的开口， 那些通过hit-or-miss变换来计算的，它保留了形状的拓扑结构。（谷歌翻译）</li>
-<li>拓扑骨架线（<a href="https://en.wikipedia.org/wiki/Topological_skeleton" target="_blank" rel="noopener">Topological skeleton</a>）在形状分析中，形状的骨架（或拓扑骨架）是与其边界等距的形状的薄形。骨架通常强调形状的几何和拓扑性质，如连通性，拓扑结构，长度，方向和宽度。连同它的点到形状边界的距离，骨架还可以作为形状的表示（它们包含重建形状所需的所有信息）。（谷歌翻译）</li>
+<li>拓扑骨架线（<a href="https://en.wikipedia.org/wiki/Topological_skeleton" target="_blank" rel="noopener">Topological skeleton</a>）在形状分析中，形状的骨架（或拓扑骨架）是与其边界等距的形状的薄形。骨架通常强调形状的几何和拓扑性质，如连通性，拓扑结构，长度，方向和宽度。连同它的点到形状边界的距离，骨架还可以作为形状的表示（它们包含重建形状所需的所有信息）。（谷歌翻译）<a id="more"></a>
+<h1 id="骨架线提取方法"><a href="#骨架线提取方法" class="headerlink" title="骨架线提取方法"></a>骨架线提取方法</h1>根据上面图像骨架线的定义，即骨架线到边界等距，可知骨架线是与边界距离相等的点的集合。作为专业的GIS人员，很容易就想到了由边界向内部做缓冲区，就可以求出中心线，也可以提出骨架线。这里生成的缓冲区必须是连续的缓冲区，所以不能使用矢量缓冲区的<strong>Buffer</strong>，而应该使用<strong>欧氏距离</strong>向图形内部做缓冲区，原理和openCV中的<a href="https://en.wikipedia.org/wiki/Distance_transform" target="_blank" rel="noopener"><strong>距离变换</strong></a>一致。</li>
 </ol>
-<h1 id="骨架线提取方法"><a href="#骨架线提取方法" class="headerlink" title="骨架线提取方法"></a>骨架线提取方法</h1><p>根据上面图像骨架线的定义，即骨架线到边界等距，可知骨架线是与边界距离相等的点的集合。作为专业的GIS人员，很容易就想到了由边界向内部做缓冲区，就可以求出中心线，也可以提出骨架线。这里生成的缓冲区必须是连续的缓冲区，所以不能使用矢量缓冲区的<strong>Buffer</strong>，而应该使用<strong>欧氏距离</strong>向图形内部做缓冲区，原理和openCV中的<a href="https://en.wikipedia.org/wiki/Distance_transform" target="_blank" rel="noopener"><strong>距离变换</strong></a>一致。</p>
 <h2 id="欧式距离"><a href="#欧式距离" class="headerlink" title="欧式距离"></a>欧式距离</h2><p>直角坐标系中两点间的直线距离：<br>$$ dist = \sqrt{(x_1-x_2)^2 + (y_1-y_2)^2}$$</p>
 <h2 id="ArcMap中的欧氏距离"><a href="#ArcMap中的欧氏距离" class="headerlink" title="ArcMap中的欧氏距离"></a>ArcMap中的欧氏距离</h2><blockquote>
 <p>Euclidean Distance gives the distance from each cell in the raster to the closest source. Example of usage: What is the distance to the closest town?<br><img src="http://img.blog.csdn.net/20171128230338728?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvdTAxMDk2MzQzNQ==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="欧式距离"></p>
